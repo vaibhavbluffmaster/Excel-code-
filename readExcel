@@ -8,12 +8,12 @@ Read excel file, write excel file
       String fileName = "filePath"+filename;
      /*** Variables for source file. */
       
-      InputStream excelSourceFileToRead = new FileInputStream(sourceFileName);
-      XSSFWorkbook excelSourceFileWb = new XSSFWorkbook(excelSourceFileToRead);
-      XSSFSheet excelSourceFileSheet = excelSourceFileWb.getSheetAt(0);
+      InputStream excelFileToRead = new FileInputStream(FileName);
+      XSSFWorkbook excelFileWb = new XSSFWorkbook(excelFileToRead);
+      XSSFSheet excelFileSheet = excelFileWb.getSheetAt(0);
 
       /*** Getting The rows of source file to read. */
-      Iterator<Row> sourceRowIt = excelSourceFileSheet.rowIterator();
+      Iterator<Row> sourceRowIt = excelFileSheet.rowIterator();
 
       /*** Getting first record of the file. */
       /*** Iterating physical number of rows. */
@@ -22,14 +22,14 @@ Read excel file, write excel file
        * actual starting row number and rowIterator contains records
        */
       while (sourceRowIt.hasNext()) {
-        XSSFRow sourceFileRow = (XSSFRow) sourceRowIt.next();
-        if (excelSourceFileSheet.getPhysicalNumberOfRows() > fileRow.getRowNum()) {
+        XSSFRow fileRow = (XSSFRow) sourceRowIt.next();
+        if (excelFileSheet.getPhysicalNumberOfRows() > fileRow.getRowNum()) {
           if (fileRow.getRowNum() < 5) {
             /**** just skip the header rows e.g. 0 to 5 */
             continue;
           }
 
-          /*** Creating sourceFileCellIterator */
+          /*** Creating fileCellIterator */
           Iterator<Cell> fileRowCells = fileRow.cellIterator();
           StringBuilder remarks = new StringBuilder();
           /**
